@@ -1,0 +1,4 @@
+	label.xrequired:before {
+		content: "*";
+		color: red;
+	}
