@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.members.model.MembersVO" table="MEMBERS" >
+		
+		<id name="memNo" column="MEM_NO">
+			<generator class="sequence">
+				<param name="sequence">SEQ_MEMNO</param>
+			</generator>
+		</id>
+		
+		<property name="memAcc" column="MEM_ACC" />
+		<property name="memPw" column="MEM_PW" />
+		<property name="memNickName" column="MEM_NICKNAME"/>
+		<property name="memEmail" column="MEM_EMAIL"/>
+		<property name="memBirth" column="MEM_BIRTH"/>
+		<property name="memGender" column="MEM_GENDER"/>
+		<property name="memRegdate" column="MEM_REGDATE"/>
+		<property name="memStatus" column="MEM_STATUS"/>
+		<property name="memSalt" column="MEM_SALT"/>
+		<property name="memAuthority" column="MEM_AUTHORITY"/>
+		<property name="memPic" column="MEM_PIC"/>
+	
+		<many-to-one name="MessageVO" class="com.message.model.MessageVO" lazy="false">
+			<column name="MSG_NO" />
+		</many-to-one>
+		
+	</class>
+</hibernate-mapping>

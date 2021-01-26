@@ -5,7 +5,6 @@ import java.sql.Timestamp;
 public class MessageVO {
 	private String msgNo;
 	private String msgFrom;
-	private String msgTo;
 	private Timestamp msgTime;
 	private String msgContent;
 	private String msgCrno;
@@ -22,12 +21,6 @@ public class MessageVO {
 	}
 	public void setMsgFrom(String msgFrom) {
 		this.msgFrom = msgFrom;
-	}
-	public String getMsgTo() {
-		return msgTo;
-	}
-	public void setMsgTo(String msgTo) {
-		this.msgTo = msgTo;
 	}
 	public Timestamp getMsgTime() {
 		return msgTime;
