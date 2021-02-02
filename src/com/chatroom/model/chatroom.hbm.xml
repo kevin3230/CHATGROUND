@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.chatroom.model.ChatRoomVO" table="CHATROOM">
+		
+		<id name="crNo" column="CR_NO">
+			<generator class="sequence">
+				<param name="sequence">SEQ_CRNO</param>
+			</generator>
+		</id>
+		
+		<property name="crNickName" column="CR_NICKNAME" />
+		<property name="crMemRecord" column="CR_MEMRECORD" />
+		<property name="crMem1" column="CR_MEM1" />
+		<property name="crMem2" column="CR_MEM2" />
+		<property name="crMem3" column="CR_MEM3" />
+		<property name="crMem4" column="CR_MEM4" />
+		<property name="crMem5" column="CR_MEM5" />
+		
+	</class>
+</hibernate-mapping>

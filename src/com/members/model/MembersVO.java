@@ -2,9 +2,13 @@ package com.members.model;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.HashSet;
+import java.util.Set;
+
+import com.chatroom.model.ChatRoomVO;
 
 public class MembersVO {
-	private String memNo;
+	private Integer memNo;
 	private String memAcc;
 	private String memPw;
 	private String memNickName;
@@ -16,11 +20,12 @@ public class MembersVO {
 	private String memSalt;
 	private String memAuthority;
 	private Byte[] memPic;
+	//private Set<ChatRoomVO> chatRooms = new HashSet<ChatRoomVO>();
 	
-	public String getMemNo() {
+	public Integer getMemNo() {
 		return memNo;
 	}
-	public void setMemNo(String memNo) {
+	public void setMemNo(Integer memNo) {
 		this.memNo = memNo;
 	}
 	public String getMemAcc() {
@@ -89,4 +94,11 @@ public class MembersVO {
 	public void setMemPic(Byte[] memPic) {
 		this.memPic = memPic;
 	}
+//	public Set<ChatRoomVO> getChatRooms() {
+//		return chatRooms;
+//	}
+//	public void setChatRooms(Set<ChatRoomVO> chatRooms) {
+//		this.chatRooms = chatRooms;
+//	}
+	
 }

@@ -22,9 +22,13 @@
 		<property name="memAuthority" column="MEM_AUTHORITY"/>
 		<property name="memPic" column="MEM_PIC"/>
 	
-		<many-to-one name="MessageVO" class="com.message.model.MessageVO" lazy="false">
-			<column name="MSG_NO" />
-		</many-to-one>
-		
+	<!-- 
+		<set name="chatRoom" table="CHATROOM" lazy="false" order-by="CR_NO asc">
+			<key>
+				<column name="memNo" />
+			</key>
+			<one-to-many class="com.chatroom.model.ChatRoomVO" />
+		</set>
+	 -->
 	</class>
 </hibernate-mapping>

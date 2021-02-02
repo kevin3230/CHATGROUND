@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.message.model.MessageVO" table="MESSAGE">
+		
+		<id name="msgNo" column="MSG_NO">
+			<generator class="sequence">
+				<param name="sequence">SEQ_MSGNO</param>
+			</generator>
+		</id>
+		
+		<property name="msgFrom" column="MSG_FROM" />
+		<property name="msgTime" column="MSG_TIME" />
+		<property name="msgContent" column="MSG_CONTENT" />
+		<property name="msgCrno" column="MSG_CRNO" />
+		<property name="msgStatus" column="MSG_STATUS" />
+		
+	</class>
+</hibernate-mapping>
