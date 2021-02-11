@@ -19,7 +19,7 @@ public class MembersVO {
 	private Integer memStatus;
 	private String memSalt;
 	private String memAuthority;
-	private Byte[] memPic;
+	private byte[] memPic;
 	//private Set<ChatRoomVO> chatRooms = new HashSet<ChatRoomVO>();
 	
 	public Integer getMemNo() {
@@ -88,10 +88,10 @@ public class MembersVO {
 	public void setMemAuthority(String memAuthority) {
 		this.memAuthority = memAuthority;
 	}
-	public Byte[] getMemPic() {
+	public byte[] getMemPic() {
 		return memPic;
 	}
-	public void setMemPic(Byte[] memPic) {
+	public void setMemPic(byte[] memPic) {
 		this.memPic = memPic;
 	}
 //	public Set<ChatRoomVO> getChatRooms() {

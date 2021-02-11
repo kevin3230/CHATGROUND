@@ -34,10 +34,10 @@ public class MessageVO {
 	public void setMsgContent(String msgContent) {
 		this.msgContent = msgContent;
 	}
-	public String getMsgCRNo() {
+	public String getMsgCrno() {
 		return msgCrno;
 	}
-	public void setMsgCRNo(String msgCRNo) {
+	public void setMsgCrno(String msgCRNo) {
 		this.msgCrno = msgCRNo;
 	}
 	public Integer getMsgStatus() {

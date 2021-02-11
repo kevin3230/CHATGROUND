@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <title>ChatGround</title>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/utility/css/bootstrap.min.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/front-end/members/css/MembersSignUp.css">
@@ -11,13 +11,23 @@
 <body>
 	<div class="container">
 		<div class="row justify-content-center">
+			<%-- 錯誤表列 --%>
+			<c:if test="${not empty errorMsgs}">
+				<font style="color: red">請修正以下錯誤:</font>
+				<ul>
+					<c:forEach var="message" items="${errorMsgs}">
+						<li style="color: red">${message}</li>
+					</c:forEach>
+				</ul>
+			</c:if>
+			
 			<div class="col-10">
 				<div class="col-12">
 					會員註冊
 				</div>
 				<div class="col-12">
 					<!-- 要改成servlet路徑 -->
-					<form action="<%=request.getContextPath() %>/" method="post" id="signUp">
+					<form action="<%=request.getContextPath() %>/Members/Members.do" method="post" id="signUp" enctype="multipart/form-data">
 						<table>
 							<thead>
 								<tr>
@@ -63,6 +73,7 @@
 								</tr>
 							</tbody>
 						</table>
+						<input type="hidden" name="action" value="signUp">
 					</form>
 				</div>
 				<div class="row justify-content-center">
