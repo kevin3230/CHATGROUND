@@ -41,6 +41,7 @@ public class MembersHibernateDAO extends HibernateDaoSupport implements MembersD
 		return list;
 	}
 	
+	
 	public static void main(String[] args) {
 		
 		//取得ApplicationContext實體

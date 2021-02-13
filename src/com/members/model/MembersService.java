@@ -62,7 +62,7 @@ public class MembersService {
 		String hashPW = null;
 		StringBuilder salty = new StringBuilder("");
 		//salty有5個字元
-		for(int i = 1; i < 6; i++) {
+		for(int i = 1; i < 21; i++) {
 			//5面骰,特殊字元權重3/5,數字權重1/5,字母權重1/5
 			int dice = (int)Math.floor(Math.random()*5);
 			if(dice <= 2) {
