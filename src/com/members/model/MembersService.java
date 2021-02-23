@@ -2,6 +2,9 @@ package com.members.model;
 
 import java.util.List;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 public class MembersService {
 	//specialCharacter有28個字元
 	private static final String[] specialCharacter = {"`", "~", "!", "@", "#", "$", "%", "^", "&", "*"
@@ -15,32 +18,61 @@ public class MembersService {
 								, "M", "m", "N", "n", "O", "o", "P", "p", "Q", "q", "R", "r", "S", "s"
 								, "T", "t", "U", "u", "V", "v", "W", "w", "X", "x", "Y", "y", "Z", "z"};
 	
-	public void insert(MembersVO membersVO) {
+	public boolean insert(MembersVO membersVO) {
 		String[] saltyAndPW = hashPW(membersVO.getMemPw());//傳入輸入的密碼,取得sha-1雜湊後的密碼與salty
 		membersVO.setMemSalt(saltyAndPW[0]);//VO的salty欄位設為salty
 		membersVO.setMemPw(saltyAndPW[1]);//VO的PW欄位重設為hashPW
-		MembersHibernateDAO mhDAO = new MembersHibernateDAO();
-		mhDAO.insert(membersVO);//VO新增進資料庫
+		//取得ApplicationContext實體
+		ApplicationContext context = new ClassPathXmlApplicationContext("beans-config.xml");
+		//建立DAO物件
+		MembersDAO_interface mhDAO = (MembersDAO_interface)context.getBean("membersDAO");
+		if(!mhDAO.findByMemAcc(membersVO.getMemAcc()).isEmpty()) {//如果資料庫內帳號沒有重複才新增會員
+			mhDAO.insert(membersVO);//VO新增進資料庫
+			return true;
+		}else {
+			return false;
+		}
 	}
 	
 	public void update(MembersVO membersVO) {
-		MembersHibernateDAO mhDAO = new MembersHibernateDAO();
+		//取得ApplicationContext實體
+		ApplicationContext context = new ClassPathXmlApplicationContext("beans-config.xml");
+		//建立DAO物件
+		MembersDAO_interface mhDAO = (MembersDAO_interface)context.getBean("membersDAO");
 		mhDAO.update(membersVO);
 	}
 	
 	public void delete(Integer memNo) {
-		MembersHibernateDAO mhDAO = new MembersHibernateDAO();
+		//取得ApplicationContext實體
+		ApplicationContext context = new ClassPathXmlApplicationContext("beans-config.xml");
+		//建立DAO物件
+		MembersDAO_interface mhDAO = (MembersDAO_interface)context.getBean("membersDAO");
 		mhDAO.delete(memNo);
 	}
 	
 	public MembersVO findByPrimaryKey(Integer memNo) {
-		MembersHibernateDAO mhDAO = new MembersHibernateDAO();
+		//取得ApplicationContext實體
+		ApplicationContext context = new ClassPathXmlApplicationContext("beans-config.xml");
+		//建立DAO物件
+		MembersDAO_interface mhDAO = (MembersDAO_interface)context.getBean("membersDAO");
 		MembersVO membersVO = mhDAO.findByPrimaryKey(memNo);
 		return membersVO;
 	}
 	
+	public List<MembersVO> findByMemAcc(String memAcc) {
+		//取得ApplicationContext實體
+		ApplicationContext context = new ClassPathXmlApplicationContext("beans-config.xml");
+		//建立DAO物件
+		MembersDAO_interface mhDAO = (MembersDAO_interface)context.getBean("membersDAO");
+		List<MembersVO> list = mhDAO.findByMemAcc(memAcc);
+		return list;
+	}
+	
 	public List<MembersVO> getAll() {
-		MembersHibernateDAO mhDAO = new MembersHibernateDAO();
+		//取得ApplicationContext實體
+		ApplicationContext context = new ClassPathXmlApplicationContext("beans-config.xml");
+		//建立DAO物件
+		MembersDAO_interface mhDAO = (MembersDAO_interface)context.getBean("membersDAO");
 		return mhDAO.getAll();
 	}
 	
@@ -96,6 +128,11 @@ public class MembersService {
 		}
 	}
 	
+	//測試AOP
+//	public void test() {
+//		System.out.println("test method");
+//	}
+	
 	public static void main(String[] args) {
 		
 		//測試hashPW(String rawPW)
@@ -111,6 +148,16 @@ public class MembersService {
 //		membersVO.setMemSalt(saltyAndPW[0]);
 //		membersVO.setMemPw(saltyAndPW[1]);
 //		System.out.println(verifyPW(membersVO, attemptPW));
+		
+		//測試getAll()
+//		MembersService memSVC = new MembersService();
+//		List<MembersVO> list = memSVC.getAll();
+//		for(MembersVO amembersVO : list) {
+//			System.out.println(amembersVO.getMemAcc());
+//			System.out.println(amembersVO.getMemPw());
+//			System.out.println(amembersVO.getMemEmail());
+//			System.out.println(amembersVO.getMemRegdate());
+//		}
 		
 		
 	}

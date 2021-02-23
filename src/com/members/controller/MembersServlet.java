@@ -67,6 +67,11 @@ public class MembersServlet extends HttpServlet {
 				String memAuthority = "11111";
 				byte[] memPic = getPicBytes(req.getPart("mempic"));
 				
+				/*********************檢查參數是否格式正確*********************/
+				//檢查參數是否格式正確
+
+				//檢查參數是否格式正確
+				
 				//取得salty與hashPW
 				String[] saltyAndPW = MembersService.hashPW(memPw);
 				memPw = saltyAndPW[1];
@@ -86,13 +91,18 @@ public class MembersServlet extends HttpServlet {
 				membersVO.setMemAuthority(memAuthority);
 				membersVO.setMemPic(memPic);
 				
-				//透過hibernateDAO新增會員到資料庫
+				//如果參數格式不正確,轉送回MembersSignUp.jsp註冊頁面
+				if(!errorMsgs.isEmpty()) {
+					req.setAttribute("membersVO", membersVO);	//含有錯誤格式的VO也存入req
+					errorMsgs.add("新增會員失敗:");
+					RequestDispatcher failureView = req
+							.getRequestDispatcher("/front-end/members/MembersSignUp.jsp");
+					failureView.forward(req, res);
+				}
 				
-				//取得ApplicationContext實體
-				ApplicationContext context = new ClassPathXmlApplicationContext("beans-config.xml");
-				//建立DAO物件
-				MembersDAO_interface memDAO = (MembersDAO_interface)context.getBean("membersDAO");
-				memDAO.insert(membersVO);
+				/*********************透過MembersService新增會員到資料庫*********************/
+				MembersService memSVC = new MembersService();
+				memSVC.insert(membersVO);
 				
 				//新增完成,頁面轉交首頁
 				res.sendRedirect("/ChatGround/front-end/index/index.jsp");
@@ -105,7 +115,47 @@ public class MembersServlet extends HttpServlet {
 			}
 		}
 		
-		
+		if("signIn".equals(action)) { //來自MembersSignIn.jsp的請求
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+			try {
+				Integer memNo = (Integer)session.getAttribute("membersVO_memNo");
+				if(null == memNo) {	//會員尚未登入,存入session
+					String memAcc = req.getParameter("account");
+					String memPw = req.getParameter("password");
+					
+					MembersService memSVC = new MembersService();
+					MembersVO membersVO = memSVC.findByMemAcc(memAcc).get(0);
+					if(MembersService.verifyPW(membersVO, memPw)){	//如果密碼正確,轉回到首頁或上一頁
+						session.setAttribute("membersVO_memNo", membersVO.getMemNo());
+						System.out.println("登入成功");
+						res.sendRedirect("/ChatGround/front-end/index/index.jsp");
+					
+					}else{	//密碼錯誤,返回登入頁面
+						req.setAttribute("membersVO", membersVO);
+						errorMsgs.add("登入會員失敗:");
+						RequestDispatcher failureView = req
+								.getRequestDispatcher("/front-end/members/MembersSignIn.jsp");
+						failureView.forward(req, res);
+					}
+					
+					
+				} else {	//已登入,轉回到首頁或上一頁
+//					System.out.println("已登入");
+					res.sendRedirect("/ChatGround/front-end/index/index.jsp");
+				}
+			}catch(Exception e){
+//				System.out.println(e.getMessage());
+				errorMsgs.add("登入會員失敗:"+e.getMessage());
+				RequestDispatcher failureView = req
+						.getRequestDispatcher("/front-end/members/MembersSignIn.jsp");
+				failureView.forward(req, res);
+			}
+			
+			
+		}
 		
 		
 		

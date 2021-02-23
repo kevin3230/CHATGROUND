@@ -9,6 +9,7 @@ public interface MembersDAO_interface {
 	public void update(MembersVO membersVO);
 	public void delete(Integer memNo);
 	public MembersVO findByPrimaryKey(Integer memNo);
+	public List<MembersVO> findByMemAcc(String memAcc);
 	public List<MembersVO> getAll();
 	
 	//public Set<ChatRoomVO> getChatRoomBycrNo(String crNo);

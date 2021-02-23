@@ -14,7 +14,7 @@
 			<div class="col-10">
 				<div class="row justify-content-center">
 					<!-- 要改成servlet路徑 -->
-					<form action="<%=request.getContextPath() %>/" method="post" id="signIn">
+					<form action="<%=request.getContextPath() %>/Members/Members.do" method="post" id="signIn">
 						<table>
 							<thead>
 								<tr>
@@ -32,6 +32,7 @@
 								</tr>
 							</tbody>
 						</table>
+						<input type="hidden" name="action" value="signIn">
 					</form>
 				</div>
 				<div class="row justify-content-center">

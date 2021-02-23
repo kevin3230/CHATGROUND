@@ -44,4 +44,10 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
     <bean id="memCRSetDAO" class="com.memcrset.model.MemCRSetHibernateDAO">
     	<property name="sessionFactory" ref="sessionFactory" />
     </bean>
+    <!--
+    -->
+    <bean id="membersSvc" class="com.members.model.MembersService"/>
+    <bean id="signInAspect" class="aspect.SignInAspect"/>
+    <aop:aspectj-autoproxy />
+    
 </beans>

@@ -11,6 +11,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class MembersHibernateDAO extends HibernateDaoSupport implements MembersDAO_interface{
 	
 	private static final String GET_ALL_STMT = "from MembersVO order by memNo";
+	private static final String GET_BY_MEMACC = "from MembersVO where memAcc=:memAcc order by memNo";
 
 	@Override
 	public void insert(MembersVO membersVO) {
@@ -35,11 +36,19 @@ public class MembersHibernateDAO extends HibernateDaoSupport implements MembersD
 	}
 
 	@Override
+	public List<MembersVO> findByMemAcc(String memAcc) {
+		List<MembersVO> list = null;
+		list = getHibernateTemplate().findByNamedParam(GET_BY_MEMACC, "memAcc", memAcc);
+		return list;
+	}
+	
+	@Override
 	public List<MembersVO> getAll() {
 		List<MembersVO> list = null;
 		list = getHibernateTemplate().find(GET_ALL_STMT);
 		return list;
 	}
+	
 	
 	
 	public static void main(String[] args) {
@@ -65,16 +74,36 @@ public class MembersHibernateDAO extends HibernateDaoSupport implements MembersD
 		
 		//測試修改
 		
-		//測試查詢
-		List<MembersVO> list = dao.getAll();
-		for(MembersVO amembersVO : list) {
-			System.out.println(amembersVO.getMemAcc());
-			System.out.println(amembersVO.getMemPw());
-			System.out.println(amembersVO.getMemEmail());
-			System.out.println(amembersVO.getMemRegdate());
-			
-		}
+		/****測試查詢****/
+		//測試getAll()
+//		List<MembersVO> list = dao.getAll();
+//		for(MembersVO amembersVO : list) {
+//			System.out.println(amembersVO.getMemAcc());
+//			System.out.println(amembersVO.getMemPw());
+//			System.out.println(amembersVO.getMemEmail());
+//			System.out.println(amembersVO.getMemRegdate());
+//			
+//		}
+		
+		//測試findByMemAcc()
+//		List<MembersVO> list = dao.findByMemAcc("123");
+//		for(MembersVO amembersVO : list) {
+//			System.out.println(amembersVO.getMemAcc());
+//			System.out.println(amembersVO.getMemPw());
+//			System.out.println(amembersVO.getMemEmail());
+//			System.out.println(amembersVO.getMemRegdate());
+//			
+//		}
 		
 		
+		
+		//測試AOP
+		
+//				//取得ApplicationContext實體
+//				ApplicationContext context = new ClassPathXmlApplicationContext("beans-config.xml");
+//				
+//				//建立service物件
+//				MembersService memSvc = (MembersService)context.getBean("membersSvc");
+//				memSvc.test();
 	}
 }
