@@ -26,7 +26,7 @@ public class MembersService {
 		ApplicationContext context = new ClassPathXmlApplicationContext("beans-config.xml");
 		//建立DAO物件
 		MembersDAO_interface mhDAO = (MembersDAO_interface)context.getBean("membersDAO");
-		if(!mhDAO.findByMemAcc(membersVO.getMemAcc()).isEmpty()) {//如果資料庫內帳號沒有重複才新增會員
+		if(mhDAO.findByMemAcc(membersVO.getMemAcc()).isEmpty()) {//如果資料庫內帳號沒有重複才新增會員
 			mhDAO.insert(membersVO);//VO新增進資料庫
 			return true;
 		}else {

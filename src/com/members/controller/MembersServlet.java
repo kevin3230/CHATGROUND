@@ -102,11 +102,16 @@ public class MembersServlet extends HttpServlet {
 				
 				/*********************透過MembersService新增會員到資料庫*********************/
 				MembersService memSVC = new MembersService();
-				memSVC.insert(membersVO);
-				
-				//新增完成,頁面轉交首頁
-				res.sendRedirect("/ChatGround/front-end/index/index.jsp");
-				
+				if(memSVC.insert(membersVO)) {	//如果會員帳號不重複就新增會員
+					//新增完成,頁面轉交首頁
+					res.sendRedirect("/ChatGround/front-end/index/index.jsp");
+				}else {	//會員帳號重複了,新增會員失敗,轉送回membersSignUp.jsp
+					req.setAttribute("membersVO", membersVO);	//含有錯誤格式的VO也存入req
+					errorMsgs.add("新增會員失敗:");
+					RequestDispatcher failureView = req
+							.getRequestDispatcher("/front-end/members/MembersSignUp.jsp");
+					failureView.forward(req, res);
+				}
 			}catch (Exception e){
 				errorMsgs.add("新增會員失敗:"+e.getMessage());
 				RequestDispatcher failureView = req
@@ -130,7 +135,8 @@ public class MembersServlet extends HttpServlet {
 					MembersVO membersVO = memSVC.findByMemAcc(memAcc).get(0);
 					if(MembersService.verifyPW(membersVO, memPw)){	//如果密碼正確,轉回到首頁或上一頁
 						session.setAttribute("membersVO_memNo", membersVO.getMemNo());
-						System.out.println("登入成功");
+						session.setAttribute("membersVO_memAcc", membersVO.getMemAcc());
+//						System.out.println("登入成功");
 						res.sendRedirect("/ChatGround/front-end/index/index.jsp");
 					
 					}else{	//密碼錯誤,返回登入頁面
@@ -155,6 +161,30 @@ public class MembersServlet extends HttpServlet {
 			}
 			
 			
+		}
+		
+		if("signOut".equals(action)) { //來自index/NavBar.jsp的請求
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+			try {
+				Integer memNo = (Integer)session.getAttribute("membersVO_memNo");
+				String memAcc = (String)session.getAttribute("membersVO_memAcc");
+				
+				if(null != memNo || null != memAcc) {
+					session.invalidate(); //登出會員,清除session
+				}
+				
+				//登出,重導回首頁
+				res.sendRedirect("/ChatGround/front-end/index/index.jsp");
+			}catch(Exception e){
+//				System.out.println(e.getMessage());
+				errorMsgs.add("登出會員失敗:"+e.getMessage());
+				RequestDispatcher failureView = req
+						.getRequestDispatcher("/front-end/members/MembersSignIn.jsp");
+				failureView.forward(req, res);
+			}
 		}
 		
 		

@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/utility/css/bootstrap.min.css">
 </head>
 <body>
+	<jsp:include page="/front-end/index/NavBar.jsp" flush="true" />
 	<div class="container">
 		<div class="row justify-content-center">
 			<div class="col-10">
@@ -15,9 +16,9 @@
 					群聊網站
 				</div>
 				<div class="col-12">
-					<a href="#">會員</a>
 					<a href="#">聊天室</a>
-					<a href="<%= request.getContextPath()%>/front-end/members/MembersSignIn.jsp">會員登入</a>
+					<a href="<%= request.getContextPath()%>/front-end/members/MembersSignUp.jsp">註冊</a>
+					<a href="#">會員登入</a>
 				</div>
 			</div>
 		</div>

@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/front-end/members/css/MembersSignUp.css">
 </head>
 <body>
+	<jsp:include page="/front-end/index/NavBar.jsp" flush="true" />
 	<div class="container">
 		<div class="row justify-content-center">
 			<%-- 錯誤表列 --%>
