@@ -72,10 +72,10 @@ public class MembersServlet extends HttpServlet {
 
 				//檢查參數是否格式正確
 				
-				//取得salty與hashPW
-				String[] saltyAndPW = MembersService.hashPW(memPw);
-				memPw = saltyAndPW[1];
-				memSalt = saltyAndPW[0];
+				//取得salty與hashPW,改在membersService.insert()內取得
+//				String[] saltyAndPW = MembersService.hashPW(memPw);
+//				memPw = saltyAndPW[1];
+//				memSalt = saltyAndPW[0];
 				
 				//參數放入MembersVO中
 				MembersVO membersVO = new MembersVO();
@@ -107,7 +107,7 @@ public class MembersServlet extends HttpServlet {
 					res.sendRedirect("/ChatGround/front-end/index/index.jsp");
 				}else {	//會員帳號重複了,新增會員失敗,轉送回membersSignUp.jsp
 					req.setAttribute("membersVO", membersVO);	//含有錯誤格式的VO也存入req
-					errorMsgs.add("新增會員失敗:");
+					errorMsgs.add("新增會員失敗: 帳號重複");
 					RequestDispatcher failureView = req
 							.getRequestDispatcher("/front-end/members/MembersSignUp.jsp");
 					failureView.forward(req, res);

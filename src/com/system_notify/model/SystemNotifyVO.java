@@ -2,7 +2,7 @@ package com.system_notify.model;
 
 import java.sql.Timestamp;
 
-public class SystemNotify {
+public class SystemNotifyVO {
 	private String snno;
 	private String snContent;
 	private Timestamp snTime;

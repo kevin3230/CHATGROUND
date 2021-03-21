@@ -43,6 +43,8 @@ public class PasswordHashCode {
 			digest.update(rawPW.getBytes("utf8"));
 			//digest()完成hash值計算,byte陣列轉成大整數後再轉成16進位變成字串
 			hashPW = String.format("%040x",new BigInteger(1, digest.digest()));
+//			System.out.println(hashPW);
+//			System.out.println(PW);
 			//與資料庫內的密碼欄位hash值比對是否相同,確認密碼是否正確
 			if(hashPW.equals(PW)) {
 				return true;

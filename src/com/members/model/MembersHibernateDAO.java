@@ -99,11 +99,12 @@ public class MembersHibernateDAO extends HibernateDaoSupport implements MembersD
 		
 		//測試AOP
 		
-//				//取得ApplicationContext實體
+				//取得ApplicationContext實體
 //				ApplicationContext context = new ClassPathXmlApplicationContext("beans-config.xml");
-//				
-//				//建立service物件
+				
+				//建立service物件
 //				MembersService memSvc = (MembersService)context.getBean("membersSvc");
-//				memSvc.test();
+//				membersVO.setMemAcc("123");
+//				memSvc.test(membersVO);
 	}
 }

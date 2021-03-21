@@ -111,6 +111,8 @@ public class MembersService {
 		saltyAndPW[0] = salty.toString();
 		hashPW = utility.PasswordHashCode.getHashCode(rawPW + salty);
 		saltyAndPW[1] = hashPW;
+//		System.out.println("saltyAndPW[0]:" + saltyAndPW[0]);
+//		System.out.println("saltyAndPW[1]:" + saltyAndPW[1]);
 		
 		return saltyAndPW;
 	}
@@ -129,8 +131,9 @@ public class MembersService {
 	}
 	
 	//測試AOP
-//	public void test() {
+//	public void test(MembersVO membersVO) {
 //		System.out.println("test method");
+//		System.out.println(membersVO.getMemAcc());
 //	}
 	
 	public static void main(String[] args) {
@@ -158,7 +161,6 @@ public class MembersService {
 //			System.out.println(amembersVO.getMemEmail());
 //			System.out.println(amembersVO.getMemRegdate());
 //		}
-		
 		
 	}
 	

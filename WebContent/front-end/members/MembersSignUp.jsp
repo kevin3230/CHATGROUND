@@ -38,7 +38,7 @@
 							<tbody>
 								<tr>
 									<th><label class="xrequired">帳號</label></th>
-									<td><input type="text" name="account" required="required"></td>
+									<td><input type="text" name="account" required="required" value="${requestScope.membersVO.memAcc}"></td>
 								</tr>
 								<tr>
 									<th><label class="xrequired">密碼</label></th>
@@ -50,15 +50,15 @@
 								</tr>
 								<tr>
 									<th><label class="xrequired">暱稱</label></th>
-									<td><input type="text" name="nickname" required="required"></td>
+									<td><input type="text" name="nickname" required="required" value="${requestScope.membersVO.memNickName }"></td>
 								</tr>
 								<tr>
 									<th><label class="xrequired">信箱</label></th>
-									<td><input type="email" name="email" required="required"></td>
+									<td><input type="email" name="email" required="required" value="${requestScope.membersVO.memEmail }"></td>
 								</tr>
 								<tr>
 									<th><label class="xrequired">生日</label></th>
-									<td><input type="date" name="birthday" required="required"></td>
+									<td><input type="date" name="birthday" required="required" value="${requestScope.MembersVO.memBirth }"></td>
 								</tr>
 								<tr>
 									<th><label class="xrequired">性別</label></th>
@@ -70,7 +70,7 @@
 								</tr>
 								<tr>
 									<th>大頭照</th>
-									<td><input type="file" name="mempic"></td>
+									<td><input type="file" name="mempic" value="${requestScope.MembersVO.memPic }"></td>
 								</tr>
 							</tbody>
 						</table>

@@ -11,12 +11,6 @@
 		</id>
 		
 		<property name="crNickName" column="CR_NICKNAME" />
-		<property name="crMemRecord" column="CR_MEMRECORD" />
-		<property name="crMem1" column="CR_MEM1" />
-		<property name="crMem2" column="CR_MEM2" />
-		<property name="crMem3" column="CR_MEM3" />
-		<property name="crMem4" column="CR_MEM4" />
-		<property name="crMem5" column="CR_MEM5" />
 		
 	</class>
 </hibernate-mapping>
